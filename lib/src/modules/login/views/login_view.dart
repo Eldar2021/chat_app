@@ -15,29 +15,34 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const AnimationLogo(size: 170),
-            Column(
-              children: const [
-                CustomTextField(
-                  hintText: 'Enter your email',
-                  labelText: 'Email',
-                ),
-                SizedBox(height: 15),
-                CustomTextField(
-                  labelText: 'Password',
-                  hintText: 'Enter your password',
-                ),
-              ],
-            ),
-            CustomButton(
-              text: isLogin ? 'Login' : 'Register',
-              borderRadius: 30,
-              onPressed: () {},
-            )
-          ],
+        child: Form(
+          key: controller.formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const AnimationLogo(size: 170),
+              Column(
+                children: [
+                  CustomTextField(
+                    controller: controller.email,
+                    hintText: 'Enter your email',
+                    labelText: 'Email',
+                  ),
+                  const SizedBox(height: 15),
+                  CustomTextField(
+                    controller: controller.password,
+                    labelText: 'Password',
+                    hintText: 'Enter your password',
+                  ),
+                ],
+              ),
+              CustomButton(
+                text: isLogin ? 'Login' : 'Register',
+                borderRadius: 30,
+                onPressed: () async => await controller.loginRegister(isLogin),
+              )
+            ],
+          ),
         ),
       ),
     );
