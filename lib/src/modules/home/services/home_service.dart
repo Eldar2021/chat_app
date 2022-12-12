@@ -1,5 +1,8 @@
-import 'package:chat_app/src/services/user_manager.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../data/message_model.dart';
+import '../../../services/user_manager.dart';
 
 class HomeService {
   static Future<void> logout() async {
@@ -12,7 +15,12 @@ class HomeService {
     await userManager.removeUid();
   }
 
-  Future<dynamic> sendMessage() async {
-
+  static Future<void> sendMessage(String sms) async {
+    final sender = FirebaseAuth.instance.currentUser;
+    if (sender?.email != null) {
+      final db = FirebaseFirestore.instance;
+      final Message message = Message(sender!.email!, sms);
+      await db.collection('messages').add(message.toJson());
+    }
   }
 }

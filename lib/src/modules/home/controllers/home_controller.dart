@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
@@ -9,6 +10,8 @@ class HomeController extends GetxController {
 
   void increment() => count.value++;
 
+  final smsController = TextEditingController();
+
   Future<void> logout() async {
     AppDaiLog.showLoading();
     await HomeService.logout();
@@ -19,5 +22,13 @@ class HomeController extends GetxController {
     AppDaiLog.showLoading();
     await HomeService.delete();
     await Get.offAllNamed(Routes.FLASH_CHAT);
+  }
+
+  Future<void> sendMessage() async {
+    final sms = smsController.text.trim();
+    smsController.text = '';
+    if (sms != '') {
+      await HomeService.sendMessage(sms);
+    }
   }
 }
