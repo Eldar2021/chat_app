@@ -31,7 +31,7 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Column(
         children: [
-          const MessagesStream(),
+          MessagesStream(controller.streamMessages()),
           SendMessage(
             controller.smsController,
             () async => controller.sendMessage(),

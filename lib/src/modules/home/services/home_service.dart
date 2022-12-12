@@ -23,4 +23,9 @@ class HomeService {
       await db.collection('messages').add(message.toJson());
     }
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> streamMessages() {
+    final db = FirebaseFirestore.instance;
+    return db.collection('messages').snapshots();
+  }
 }
