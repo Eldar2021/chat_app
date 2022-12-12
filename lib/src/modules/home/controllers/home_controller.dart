@@ -1,6 +1,6 @@
-import 'package:chat_app/src/routes/app_pages.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../utils/app_dailog.dart';
 import '../services/home_service.dart';
 
