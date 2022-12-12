@@ -11,4 +11,8 @@ class HomeService {
     await FirebaseAuth.instance.currentUser?.delete();
     await userManager.removeUid();
   }
+
+  Future<dynamic> sendMessage() async {
+
+  }
 }
